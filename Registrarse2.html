@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/style.css">
+    <script src="https://kit.fontawesome.com/3409bde575.js" crossorigin="anonymous"></script>
+
+    <title>Formulario de registro</title>
+    <style>
+        * {
+            font-family: Verdana;
+        }
+    </style>
+    
+</head>
+
+<header><nav class="navbar">
+    <ul class="nav-menu">
+      <li class="nav-item">
+            <a class="nav" href="index.html">Main</a>
+      </li>
+      <li class="nav-item">
+            <a class="nav" href="about.html">Acercade nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav" href="contacto.html">Contacto</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav" href="sucursales.html">Sucursales</a>
+          </li>
+           </ul>
+          </nav>
+</header>
+<br>
+<h2 class="h2">Formulario de Registro</h2>
+<body>
+    <form name="fvalida" class="formu">
+        <table>
+            <tr>
+                <td><h3>Nombre: </h3></td>
+                <td><input type="text" name="nombre" size="30" maxlength="100" placeholder="Tiene que escribir su nombre"></td>
+                </td>
+                </tr><br>
+                <td><h3>Apellido:</h3></td>
+                <td><input type="text" name="lastname" placeholder="Tiene que escribir Apellido"></td>
+            </tr>
+            <tr>
+                <td><h3>Edad: </h3</td>
+                <td><input type="text" name="edad" size="3" maxlength="3"></td>
+                
+                </td>
+                <tr>
+                    <td><h3>Direccion: </h3></td>
+                    <td><input type="text" name="street" placeholder="ingrese su Direccion aqui" >
+                    
+                    </td>
+                <tr>
+                    <td><h3>Ciudad </h3></td>
+                    <td><input type="text" name="city" value="C.A.B.A."></td>
+                 </tr>
+
+                 <tr>
+                    <td><h3>C. P. : </h3></td>
+                    <td><input type="text" name="zipcode" size="4" maxlength="4" placeholder="ingrese su codigo postal aqui" ></td>   
+                </tr>
+            <tr>
+                <td><h3>Interés:</h3></td>
+                <td>
+                    <select name="interes">
+                        <option value="Elegir">Elegir
+                        </option>
+                        <option value="armas_cortas">Armas cortas</option>
+                        <option value="armas_largas">Armas Largas </option>
+                        <option value="armas_de_caza">Armas de Caza</option>
+                    </select>
+                </td>
+                
+            </tr>
+            <tr>
+                <td colspan="3" align="center"><input type="button" value="Enviar" onclick="valida_envia()"></td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        
+        function valida_envia() {
+            //valido el nombre
+            if (document.fvalida.nombre.value.length == 0) {
+                alert("Tiene que escribir su nombre")
+                document.fvalida.nombre.focus()//foco en el campo del error
+                return 0;
+            }
+            //valido el Apellido
+            if (document.fvalida.lastname.value.length == 0) {
+                alert("Tiene que escribir Apellido")
+                document.fvalida.lastname.focus()//foco en el campo del error
+                return 0;
+            }
+            //valido el direccion
+            if (document.fvalida.street.value.length == 0) {
+                alert("Tiene que escribir su direccion")
+                document.fvalida.street.focus()//foco en el campo del error
+                return 0;
+            }
+            //valido el Ciudad
+            if (document.fvalida.city.value.length == 0) {
+                alert("Tiene que escribir Ciudad")
+                document.fvalida.city.focus()//foco en el campo del error
+                return 0;
+            }       
+
+            //valido la edad. tiene que ser entero mayor que 18
+            edad = document.fvalida.edad.value
+            edad = validarEntero(edad)
+            document.fvalida.edad.value = edad
+            if (edad == "") {
+                alert("Tiene que introducir un número entero en su edad.")
+                document.fvalida.edad.focus()
+                return 0;
+            } else {
+                if (edad < 18) {
+                    alert("Debe ser mayor de 18 años.")
+                    document.fvalida.edad.focus()
+                    return 0;
+                }
+            }
+            //valido el Codigo postal
+            zipcode = document.fvalida.zipcode.value
+            zipcode = validarEntero(zipcode)
+            document.fvalida.zipcode.value = zipcode
+            if (zipcode == "") {
+                alert("Tiene que introducir un número entero.")
+                document.fvalida.edad.focus()
+                return 0;
+            } 
+            
+            //valido el interés
+            if (document.fvalida.interes.selectedIndex == 0) {
+                alert("Debe seleccionar un motivo de su contacto.")
+                document.fvalida.interes.focus()
+                return 0;
+            }
+
+            //el formulario se envia
+            alert("Muchas gracias por enviar el formulario");
+            document.fvalida.submit();
+        }
+
+        function validarEntero(valor) {
+            //intento convertir a entero.
+            //si era un entero no le afecta, si no lo era lo intenta convertir
+            valor = parseInt(valor)
+
+            //Compruebo si es un valor numérico
+            if (isNaN(valor)) {
+                //entonces (no es numero) devuelvo el valor cadena vacia
+                return ""
+            } else {
+                //En caso contrario (Si era un número) devuelvo el valor
+                return valor
+            }
+        }
+    </script>
+    <br>
+    
+</body>
+<footer class="footer">
+    <a class="redes" href="https://twitter.com" target="_blank"> <i class="fa-brands fa-twitter-square"></i></a>
+    <a class="redes" href="https://facebook.com" target="_blank"> <i class="fa-brands fa-facebook-square"></i></a>
+    <a class="redes" href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram-square"></i></a>
+    <br>
+    Derechos Reservados
+</Footer>
+
+</html>
